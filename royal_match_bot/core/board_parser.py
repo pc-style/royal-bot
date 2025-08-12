@@ -6,7 +6,7 @@ Handles grid detection and game state parsing.
 import cv2
 import numpy as np
 from typing import List, Dict, Tuple, Optional
-from .image_processing import identify_grid_cells, classify_piece_type
+from .image_processing import identify_grid_cells, classify_piece_type, detect_board_boundaries
 
 
 class BoardState:
@@ -94,27 +94,3 @@ def build_board_matrix(board_image: np.ndarray) -> BoardState:
     return board_state
 
 
-def detect_board_boundaries(screenshot: np.ndarray) -> Tuple[int, int, int, int]:
-    """
-    Detect the boundaries of the game board in the screenshot.
-    
-    Args:
-        screenshot: Full screenshot as numpy array
-        
-    Returns:
-        Tuple of (x1, y1, x2, y2) coordinates of board boundaries
-    """
-    # TODO: Implement proper board detection
-    # For now, assume board takes up middle portion of screen
-    height, width = screenshot.shape[:2]
-    
-    # Rough estimation - board is usually in center with some margin
-    margin_x = width // 8
-    margin_y = height // 6
-    
-    x1 = margin_x
-    y1 = margin_y
-    x2 = width - margin_x
-    y2 = height - margin_y
-    
-    return (x1, y1, x2, y2)
